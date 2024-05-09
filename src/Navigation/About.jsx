@@ -53,7 +53,7 @@ const About = () => {
         style={{ backgroundColor: "#1b1b1b", paddingTop: "64px" }}
       >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grigd-cols-2 gap-8 items-center">
             <motion.div
               className="p-8"
               initial="hidden"
