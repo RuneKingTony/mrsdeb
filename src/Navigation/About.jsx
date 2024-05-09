@@ -7,23 +7,18 @@ import valuesImage from "../assets/jnm.jpeg";
 
 const About = () => {
   const [upperRef, upperInView] = useInView({
-    triggerOnce: false,
+    triggerOnce: true, // Changed to trigger animation only once
     threshold: 0.3,
   });
 
   const [lowerRef, lowerInView] = useInView({
-    triggerOnce: false,
+    triggerOnce: true, // Changed to trigger animation only once
     threshold: 0.3,
   });
 
   const textVariants = {
-    hidden: { opacity: 0, x: "-100%" },
-    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeInOut" } },
-  };
-
-  const lowerTextVariants = {
-    hidden: { opacity: 0, x: "100%" },
-    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeInOut" } },
+    hidden: { opacity: 0, y: 50 }, // Changed x to y for vertical animation
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeInOut" } },
   };
 
   return (
@@ -34,7 +29,7 @@ const About = () => {
         style={{
           backgroundImage: `url(${image1})`,
           backgroundColor: "#1b1b1b",
-          padding:"30px",
+          padding: "30px",
           textAlign: "center", // Center align text
         }}
       >
@@ -53,7 +48,7 @@ const About = () => {
         style={{ backgroundColor: "#1b1b1b", paddingTop: "64px" }}
       >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grigd-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <motion.div
               className="p-8"
               initial="hidden"
@@ -97,7 +92,7 @@ const About = () => {
               className="p-8 shadow-md"
               initial="hidden"
               animate={lowerInView ? "visible" : "hidden"}
-              variants={lowerTextVariants}
+              variants={textVariants}
             >
               <h2 className="text-4xl font-semibold mb-4 text-yellow-600">
                 Elevating Your Efficiency and Productivity
