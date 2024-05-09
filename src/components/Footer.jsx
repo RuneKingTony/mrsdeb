@@ -27,11 +27,10 @@ const Footer = () => {
     <footer className="text-gray-300 py-8" style={{ backgroundColor: "#2b2b2b" }}>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-4 gap-4 px-4">
         <div>
-          <h4 className="font-semibold text-lg mb-4">About Me</h4>
+          <h4 className="font-semibold text-lg mb-4">About Us</h4>
           <p className="leading-relaxed">
-            An Executive Personal Assistant, specializing in providing efficient
-            and reliable administrative support to busy professionals and
-            entrepreneurs.
+          Business Executive specializing in providing efficient and reliable support to busy professionals and entrepreneurs.
+
           </p>
           <p className="mt-4 leading-relaxed">
             Expertise in managing C-Suite Executives' personal affairs and
@@ -48,7 +47,7 @@ const Footer = () => {
         </div>
        
         <div>
-          <h4 className="font-semibold text-lg mb-4">Follow Me</h4>
+          <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
           <ul>
           <li className="mb-2">
   <a href="https://www.instagram.com/p/CuuDi_cN_P-/?igsh=bTIzeHJsaGdzMWO1" target="_blank" rel="noopener noreferrer">

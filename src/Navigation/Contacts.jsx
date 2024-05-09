@@ -12,7 +12,7 @@ const Contacts = () => {
         <div className="text-center mb-10 mt-10">
           <p className="text-gray-400 text-lg">GET IN TOUCH</p>
           <h2 className="text-3xl lg:text-5xl text-yellow-600 font-bold pt-4">
-            CONTACT ME
+            CONTACT US
           </h2>
         </div>
         <div className="flex flex-col lg:flex-row">

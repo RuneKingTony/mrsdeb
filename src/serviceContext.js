@@ -40,7 +40,7 @@ export const ServiceProvider = ({ children }) => {
     {
       id: 3,
       name: "Amare Shopper",
-      sub: 'Essential kitchen items for the modern workplace.',
+      sub: 'Shop for all your essential needs',
       description:
         "Amare Shopper offers personalized shopping services tailored to your needs. From household and kitchen utensils to personal effects and customized items, we are here to assist you. Need foodstuff or fruit baskets? We`ve got you covered. Additionally, we offer import services to fulfill your specific requirements. Let us be your go-to personal shopper for all your needs",
     },

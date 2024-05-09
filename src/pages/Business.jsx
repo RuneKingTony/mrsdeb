@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { FaClipboardList, FaGift, FaHome, FaTasks, FaTools, FaUser, FaUtensils } from 'react-icons/fa';
+import { FaClipboardList, FaGift, FaHome, FaTasks, FaTools, FaUser, FaShoppingCart } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
 const services = [
   { icon: <FaUser/>, name: 'Corporate Gifting', description: 'Explore our diverse selection of corporate gifts and tailor-made solutions for every occasion. '},
   { icon: <FaGift />, name: 'Souvenirs for all Events', description: 'Souvenirs perfect for every event and occasion.' },
-  { icon: <FaUtensils />, name: 'Kitchen Essentials', description: 'Essential kitchen items for the modern workplace.' },
+  { icon: <FaShoppingCart />, name: 'Amare Shopper', description: 'Shop for all your essential needs.' },
   { icon: <FaHome />, name: 'Amare Household', description: 'Amare Household products for a touch of elegance at home or in the office.' },
   { icon: <FaTools />, name: 'Amare Concierge Services', description: 'Concierge services to streamline your busy schedule.' },
   { icon: <FaTasks/>, name: 'Specialized Services', description: 'Specialized solutions designed to meet unique corporate requirements.' },

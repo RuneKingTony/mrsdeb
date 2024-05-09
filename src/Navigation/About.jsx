@@ -30,14 +30,18 @@ const About = () => {
     <div className="relative flex-col min-h-screen overflow-hidden">
       {/* Hero Section */}
       <section
-        className="relative flex items-center justify-center h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${image1})`, backgroundColor: "#1b1b1b" }}
+        className="relative flex items-center justify-center h-screen bg-cover bg-center bg-black opacity-90"
+        style={{
+          backgroundImage: `url(${image1})`,
+          backgroundColor: "#1b1b1b",
+          padding:"30px",
+          textAlign: "center", // Center align text
+        }}
       >
-        <div className="absolute inset-0 bg-black opacity-75"></div>
         <div className="container mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-7xl font-bold text-yellow-600 mb-4">About Me</h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-yellow-600 mb-4">About Us</h1>
           <p className="text-lg md:text-xl text-white leading-relaxed md:leading-loose">
-            As an Executive Personal Assistant, I specialize in seamlessly managing C-suite executives' personal and business affairs, coordinating projects, and arranging customized corporate services with precision and reliability.
+            Business Executive specialized in seamlessly managing C-suit executives' personal and business affairs, coordinating projects, and arranging customized corporate services with precision and reliability.
           </p>
         </div>
       </section>
@@ -46,7 +50,7 @@ const About = () => {
       <section
         ref={upperRef}
         className="py-8 md:py-16 px-4 md:px-8 flex-1"
-        style={{ backgroundColor: "#1b1b1b" }}
+        style={{ backgroundColor: "#1b1b1b", paddingTop: "64px" }}
       >
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -60,7 +64,7 @@ const About = () => {
                 Empowering Success through Seamless Support
               </h2>
               <p className="text-white text-lg">
-                With my exceptional organizational skills, attention to detail, managing teams and effective communication, I help my clients focus on their core business activities while I handle their administrative and personal tasks.
+                With our exceptional organizational skills, attention to detail, managing teams, and effective communication, we help our clients focus on their core business activities while we handle their administrative and personal tasks.
               </p>
             </motion.div>
             <div className="p-8 rounded-lg shadow-md">
@@ -78,7 +82,7 @@ const About = () => {
       <section
         ref={lowerRef}
         className="py-8 md:py-16 px-4 md:px-8 flex-1"
-        style={{ backgroundColor: "#1b1b1b" }}
+        style={{ backgroundColor: "#1b1b1b", paddingTop: "64px" }}
       >
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -99,7 +103,7 @@ const About = () => {
                 Elevating Your Efficiency and Productivity
               </h2>
               <p className="text-white text-lg">
-                Whether representing business, consulting for business, driving startup, schedule, travel, personnel, organizational and email management, I am dedicated to ensuring that my clients receive the highest level of support. So, if you're looking for an executive personal assistant who can help represent your business, consult or streamline your workload and increase your productivity, I'm here to help!
+                Whether representing businesses, consulting for businesses, driving startups, managing schedules, travel arrangements, personnel, organizational tasks, and email management, we are dedicated to ensuring that our clients receive the highest level of support. So, if you're looking for executive personal assistants who can help represent your business, consult, or streamline your workload and increase your productivity, we're here to help!
               </p>
             </motion.div>
           </div>

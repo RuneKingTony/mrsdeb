@@ -14,7 +14,7 @@ const skillsData = [
 const SkillsSection = () => {
   const { ref, inView } = useInView();
   const [loadedSkills, setLoadedSkills] = useState(0);
-  const isMobile = window.innerWidth <= 640; // Adjust this value according to your design
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (inView && !isMobile) {
@@ -44,7 +44,7 @@ const SkillsSection = () => {
           src={image}
           alt="Skills"
           className="w-full max-w-md relative"
-          style={{ width: "100%", maxWidth: "600px" }} // Increase the maximum width of the image
+          style={{ width: "100%", maxWidth: "600px" }}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -69,7 +69,7 @@ const SkillsSection = () => {
             key={index}
             className="mb-6"
             initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: loadedSkills > index ? 1 : 0, y: 0 }}
+            animate={{ opacity: isMobile || loadedSkills > index ? 1 : 0, y: 0 }}
             transition={{ duration: 1 }}
           >
             <div className="flex justify-between items-center mb-2">
@@ -77,7 +77,7 @@ const SkillsSection = () => {
                 {skill.name}:
               </span>
               <span className="text-lg font-semibold text-white">
-                {loadedSkills > index ? skill.percentage : 0}%
+                {isMobile || loadedSkills > index ? skill.percentage : 0}%
               </span>
             </div>
             <div className="flex items-center bg-gray-200 rounded-full h-3">
@@ -85,7 +85,7 @@ const SkillsSection = () => {
                 className="bg-yellow-600 rounded-full h-full"
                 initial={{ width: 0 }}
                 animate={{
-                  width: loadedSkills > index ? `${skill.percentage}%` : 0,
+                  width: isMobile || loadedSkills > index ? `${skill.percentage}%` : 0,
                 }}
                 transition={{ duration: 3 }}
               ></motion.div>
@@ -96,5 +96,20 @@ const SkillsSection = () => {
     </div>
   );
 };
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 640);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile;
+}
 
 export default SkillsSection;

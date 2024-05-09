@@ -32,7 +32,7 @@ const LandingPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white text-yellow-600 px-6 py-3 md:px-8 md:py-4 rounded-md hover:bg-yellow-600 hover:text-gray-800 hover:border-transparent transition-all duration-300 ease-in-out"
               >
-                Explore My Services
+                Explore Our Services
               </motion.button>
             </Link>
           </div>
