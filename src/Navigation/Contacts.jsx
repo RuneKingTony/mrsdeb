@@ -92,10 +92,10 @@ const Contacts = () => {
                     </a>
                     <br />
                     <a
-                      href="mailto:contact@amare.kharis@gmail.com"
+                      href="mailto:contact@amarekharis.com"
                       className="text-white text-lg lg:text-2xl"
                     >
-                      contact@amare.kharis@gmail.com
+                      contact@amarekharis.com
                     </a>
                   </div>
                 </div>
