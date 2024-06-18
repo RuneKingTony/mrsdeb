@@ -5,10 +5,10 @@ import image from "../assets/skillss.jpeg";
 
 const skillsData = [
   { name: "Organization", percentage: 100 },
-  { name: "Adaptability", percentage: 95 },
-  { name: "Attention to Detail", percentage: 90 },
+  { name: "Adaptability", percentage: 96},
+  { name: "Attention to Detail", percentage: 100 },
   { name: "Confidentiality", percentage: 100 },
-  { name: "Management", percentage: 95 },
+  { name: "Management", percentage: 98 },
 ];
 
 const SkillsSection = () => {

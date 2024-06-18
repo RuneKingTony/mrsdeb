@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 
 
 const services = [
-  { icon: <FiSend/>, name: 'Travel Management', description: 'Streamlined booking processes to save time and hassle.'},
+  { icon: <FiSend/>, name: 'Travel Management', description: 'Enhanced travel assistance for smoother and more efficient trip planning, leaving you with more time to enjoy your journey.'},
   { icon: <FiClipboard />, name: 'Correspondence', description: 'Handle written communication effectively' },
   { icon: <FiSearch />, name: 'Research', description: 'Conduct thorough online research' },
   { icon: <FiBookOpen />, name: 'Startup Consultant', description: 'Provide guidance to startup ventures' },
