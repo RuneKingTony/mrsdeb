@@ -71,7 +71,7 @@ Let us be your go-to personal shopper for all your needs.`,
       id: 5,
       name: "Amare Concierge Services",
       sub: 'Concierge services to streamline your busy schedule.',
-      description: `Welcome to Amare VIP Concierge Services, your premier destination for luxury travel assistance and concierge services. At Amare VIP Concierge, we specialize in providing comprehensive care for High Net Worth Individuals (HNIs) traveling for business meetings, shopping excursions, sightseeing adventures, and more, both within and outside Nigeria. 
+      description: `Welcome to Amare V.I.P Concierge Services, your premier destination for luxury travel assistance and concierge services. At Amare V.I.P Concierge, we specialize in providing comprehensive care for High Net Worth Individuals (HNIs) traveling for business meetings, shopping excursions, sightseeing adventures, and more, both within and outside Nigeria. 
 
 Our dedicated team ensures that every aspect of your trip is meticulously planned and executed to perfection. From securing top-tier accommodations in luxurious hotels to arranging seamless transportation, including shortlets and private jets, we take care of every detail so you can focus on enjoying your journey. 
 
@@ -81,7 +81,7 @@ As a holistic concierge service, we pride ourselves in our ability to anticipate
 
 We provide air tickets and stress-free Visa on Arrival (VOA) based on client request and we offer comprehensive assistance with all other aspects of your trip. 
 
-With Amare VIP Concierge Services, you can trust that your travel experience will be nothing short of extraordinary.`,
+With Amare V.I.P Concierge Services, you can trust that your travel experience will be nothing short of extraordinary.`,
     },
     {
       id: 6,
