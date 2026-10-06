@@ -1,117 +1,97 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FiArrowUp } from "react-icons/fi";
+import { Wordmark } from "./Navbar";
+import {
+  EMAILS,
+  INSTAGRAM_URL,
+  NAV_LINKS,
+  PHONE_HREF,
+  PHONE_NUMBER,
+  WHATSAPP_NUMBER,
+  whatsappHref,
+} from "../site";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
+  const [showTop, setShowTop] = useState(false);
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you can implement the logic to subscribe the user to the newsletter
-    console.log(`Subscribing ${email} to the newsletter...`);
-    // Clear the input field after submission
-    setEmail("");
-  };
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > window.innerHeight * 1.2);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
-    <footer className="text-gray-300 py-8" style={{ backgroundColor: "#2b2b2b" }}>
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-4 gap-4 px-4">
-        <div>
-          <h4 className="font-semibold text-lg mb-4">About Us</h4>
-          <p className="leading-relaxed">
-          Business Executive specializing in providing efficient and reliable support to busy professionals and entrepreneurs.
-
-          </p>
-          <p className="mt-4 leading-relaxed">
-            Expertise in managing C-Suite Executives' personal affairs and
-            projects, representing businesses, and arranging customized
-            corporate services and professional projects.
-          </p>
-          <Link
-            to="/about" // Update this to the correct route for the about me page
-            onClick={scrollToTop} // Add onClick event to scroll to top
-            className="mt-4 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg inline-block"
-          >
-            Learn More
+    <footer className="border-t border-[color:var(--line)] bg-ink text-stone">
+      <div className="shell grid gap-14 py-20 md:grid-cols-12 md:gap-8">
+        <div className="md:col-span-5">
+          <Link to="/" aria-label="Amare Kharis, home">
+            <Wordmark />
           </Link>
+          <p className="mt-6 max-w-sm leading-relaxed">
+            Business executive support for busy professionals and entrepreneurs:
+            C‑suite personal affairs, business representation, and customized
+            corporate services and projects.
+          </p>
         </div>
-       
-        <div>
-          <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
-          <ul>
-          <li className="mb-2">
-  <a href="https://www.instagram.com/p/CuuDi_cN_P-/?igsh=bTIzeHJsaGdzMWO1" target="_blank" rel="noopener noreferrer">
-    <i className="fab fa-instagram mr-2"></i>Instagram
-  </a>
-</li>
 
-            <li className="mb-2">
-              <Link to="/">
-                <i className="fab fa-facebook mr-2"></i>Facebook{" "}
-              </Link>
+        <nav className="md:col-span-2" aria-label="Footer">
+          <h2 className="label mb-5 font-sans text-bone">Pages</h2>
+          <ul className="space-y-3">
+            <li><Link to="/" className="transition-colors hover:text-bone">Home</Link></li>
+            {NAV_LINKS.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="transition-colors hover:text-bone">{l.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="md:col-span-5">
+          <h2 className="label mb-5 font-sans text-bone">Reach us</h2>
+          <ul className="space-y-3">
+            <li>
+              <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bone">
+                WhatsApp {WHATSAPP_NUMBER}
+              </a>
             </li>
-            <li className="mb-2">
-              <Link to="/">
-                <i className="fab fa-twitter mr-2"></i>Twitter
-              </Link>
+            <li>
+              <a href={PHONE_HREF} className="transition-colors hover:text-bone">Phone {PHONE_NUMBER}</a>
             </li>
-           
+            {EMAILS.map((e) => (
+              <li key={e}>
+                <a href={`mailto:${e}`} className="break-all transition-colors hover:text-bone">{e}</a>
+              </li>
+            ))}
+            <li>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bone">
+                Instagram
+              </a>
+            </li>
           </ul>
         </div>
-        <div>
-          <h4 className="font-semibold text-lg mb-4">Subscribe to Newsletter</h4>
-          <form onSubmit={handleSubmit} className="flex mb-4">
-            <input
-              type="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={handleEmailChange}
-              className="px-4 py-2 rounded-l-lg border-gray-400 border outline-none w-full"
-              style={{ maxWidth: "300px" }} // Adjust the width as needed
-            />
-            <button
-              type="submit"
-              className="px-2 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-r-lg sm:px-6 sm:py-2"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
       </div>
-      <div className="container mx-auto px-4 text-center py-4">
-        <hr className="border-gray-400 my-8" />
-        <p>
-          &copy; {new Date().getFullYear()} AmareKhais. All rights reserved.
-        </p>
+
+      <div className="shell flex flex-col gap-2 border-t border-[color:var(--line)] py-8 text-sm sm:flex-row sm:justify-between">
+        <p>&copy; {new Date().getFullYear()} Amare Kharis Services. All rights reserved.</p>
+        <p>Perfection and excellence with style.</p>
       </div>
+
       <button
-        className="fixed bottom-10 right-10 bg-gray-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
+        type="button"
         onClick={scrollToTop}
+        aria-label="Back to top"
+        className={`fixed bottom-6 right-6 z-30 flex h-12 w-12 items-center rounded-full justify-center border border-[color:var(--line-strong)] bg-ink text-bone transition-[opacity,transform,border-color,color] duration-500 hover:border-gold hover:text-gold ${
+          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+        }`}
+        tabIndex={showTop ? 0 : -1}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 10l7-7m0 0l7 7m-7-7v18"
-          />
-        </svg>
+        <FiArrowUp aria-hidden="true" />
       </button>
     </footer>
   );

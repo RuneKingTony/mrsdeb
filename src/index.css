@@ -2,9 +2,232 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+:root {
+  --ink: #1b1b1b;
+  --ink-raised: #2b2b2b;
+  --ink-deep: #141414;
+  --gold: #ca8a04;
+  --gold-bright: #dfa21c;
+  --bone: #f4efe4;
+  --stone: #a8a29e;
+  --line: rgba(244, 239, 228, 0.14);
+  --line-strong: rgba(244, 239, 228, 0.28);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 4.5rem;
+  color-scheme: dark;
+}
 
-body {
-    font-family: 'Oswald', sans-serif;
+@layer base {
+  html {
+    background: var(--ink);
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
   }
-  
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: Archivo, system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    caret-color: var(--gold);
+  }
+
+  h1, h2, h3 {
+    font-family: Archivo, system-ui, sans-serif;
+    font-stretch: 125%;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  input, textarea {
+    font: inherit;
+  }
+
+  /* Scrollbar */
+  html {
+    scrollbar-color: #4a4640 var(--ink);
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: #4a4640; border: 2px solid var(--ink); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+
+  /* Wide grotesk: the house voice for headings, names and the index. */
+  .font-display {
+    font-stretch: 125%;
+  }
+
+  .display-xl {
+    font-stretch: 125%;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 7.4vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    overflow-wrap: break-word;
+  }
+
+  .display-l {
+    font-stretch: 125%;
+    font-weight: 650;
+    text-transform: uppercase;
+    font-size: clamp(1.5rem, 4.4vw, 3.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  .display-m {
+    font-stretch: 125%;
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0 1.75rem;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+  .btn-gold:hover { background: var(--gold-bright); }
+  .btn-gold:active { background: var(--bone); }
+  .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0 1.75rem;
+    border: 1px solid var(--line-strong);
+    color: var(--bone);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+  .btn-line:hover { border-color: var(--bone); }
+  .btn-line:active { background: var(--bone); color: var(--ink); }
+
+  /* Underlined text link that draws in gold on hover */
+  .link-rule {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-block: 0.4rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--bone);
+  }
+  .link-rule::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .link-rule::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+    z-index: 1;
+  }
+  .link-rule:hover::before,
+  .link-rule:focus-visible::before { transform: scaleX(1); }
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(244, 239, 228, 0.42); /* ≥3:1 against ink */
+    padding: 0.75rem 0;
+    color: var(--bone);
+    font-size: 1.0625rem;
+    border-radius: 0;
+    transition: border-color 0.3s var(--ease-out);
+  }
+  .field::placeholder { color: #8a847c; }
+  .field:hover { border-bottom-color: var(--stone); }
+  .field:focus { outline: none; border-bottom-color: var(--gold); }
+  .field[aria-invalid="true"] { border-bottom-color: #e2725b; }
+}
+
+/* One shared photographic grade so every frame sits on the ink ground. */
+.photo-grade {
+  filter: saturate(0.82) contrast(1.06) brightness(0.9) sepia(0.1);
+}
+.photo-grade-deep {
+  filter: saturate(0.7) contrast(1.12) brightness(0.62) sepia(0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

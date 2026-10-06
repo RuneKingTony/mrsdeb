@@ -1,163 +1,155 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { NAV_LINKS, whatsappHref } from "../site";
+
+export const Wordmark = ({ className = "" }) => (
+  <span className={`inline-flex items-baseline text-bone ${className}`}>
+    <span className="font-script text-[2.1rem] leading-none text-gold" aria-hidden="true">
+      A
+    </span>
+    <span className="ml-2 font-display text-[0.875rem] font-semibold uppercase tracking-[0.08em]" aria-hidden="true">
+      mare Kharis
+    </span>
+    <span className="sr-only">Amare Kharis</span>
+  </span>
+);
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const toggleRef = useRef(null);
+  const firstLinkRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close the menu whenever the route changes.
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    firstLinkRef.current?.focus();
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
       }
     };
-
-    window.addEventListener("scroll", handleScroll);
-
+    window.addEventListener("keydown", onKey);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
-  }, [scrolled]);
+  }, [open]);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
+  const solid = scrolled || open;
 
   return (
-    <nav
-      className={`shadow-lg ${
-        scrolled ? "h-20" : "h-28"
-      } fixed w-full z-10 transition-all duration-300 ease-in-out`}
-      style={{ backgroundColor: "#1b1b1b" }}
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${
+        solid ? "border-b border-[color:var(--line)] bg-ink" : "border-b border-transparent bg-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
-        <div className="flex items-center">
-          <Link to="/" className="text-yellow-600 font-bold ">
-            <span
-              className="text-4xl"
-              style={{ fontFamily: "Ballet, cursive" }}
+      <nav className="shell flex h-[var(--nav-h)] items-center justify-between" aria-label="Main">
+        <Link to="/" className="relative z-10 -my-2 py-2">
+          <Wordmark />
+        </Link>
+
+        <ul className="hidden items-center gap-10 md:flex">
+          {NAV_LINKS.map((l) => (
+            <li key={l.to}>
+              <NavLink
+                to={l.to}
+                className={({ isActive }) =>
+                  `label relative py-2 transition-colors duration-300 hover:text-bone ${
+                    isActive
+                      ? "text-bone after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-gold"
+                      : "text-stone"
+                  }`
+                }
+              >
+                {l.label}
+              </NavLink>
+            </li>
+          ))}
+          <li>
+            <a
+              href={whatsappHref("Hello Amare Kharis, I would like to enquire about your services.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label rounded-full border border-[color:var(--line-strong)] px-5 py-2.5 text-bone transition-colors duration-300 hover:border-gold hover:text-gold"
             >
-              A
-            </span>
-            MARE KHARIS
-          </Link>
-        </div>
-        <div className="md:hidden">
-          <button
-            onClick={toggleMobileMenu}
-            className="text-gray-300 focus:outline-none"
-          >
-            {isMobileMenuOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        <div
-          className={`${
-            isMobileMenuOpen ? "block" : "hidden"
-          } md:hidden absolute top-0 left-0 w-full pt-20 z-20`} style={{backgroundColor: '#2b2b2b'}}
+              WhatsApp
+            </a>
+          </li>
+        </ul>
+
+        <button
+          ref={toggleRef}
+          type="button"
+          className="label relative z-10 -mr-2 flex h-11 items-center gap-3 px-2 text-bone md:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((v) => !v)}
         >
-          <div className="max-w-7xl mx-auto px-4 flex flex-col items-start space-y-4">
-            <div className="flex justify-between w-full">
-              <Link to="/" onClick={() => { scrollToTop(); closeMobileMenu(); }} className="text-yellow-600 font-bold">
-                <span className="text-4xl" style={{ fontFamily: "Ballet, cursive" }}>A</span> MARE KHARIS
-              </Link>
-              <button
-                onClick={closeMobileMenu}
-                className="text-gray-300 focus:outline-none"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+          {open ? "Close" : "Menu"}
+          <span className="relative block h-3 w-5" aria-hidden="true">
+            <span
+              className={`absolute left-0 h-px w-5 bg-current transition-transform duration-300 ${
+                open ? "top-1.5 rotate-45" : "top-0.5"
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-px w-5 bg-current transition-transform duration-300 ${
+                open ? "top-1.5 -rotate-45" : "top-2.5"
+              }`}
+            />
+          </span>
+        </button>
+      </nav>
+
+      <div
+        id="mobile-menu"
+        className={`fixed inset-0 top-[var(--nav-h)] bg-ink transition-[opacity,visibility] duration-500 md:hidden ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <div className="shell flex h-full flex-col justify-between pb-10 pt-8">
+          <ul className="border-t border-[color:var(--line)]">
+            {[{ to: "/", label: "Home" }, ...NAV_LINKS].map((l, i) => (
+              <li key={l.to} className="border-b border-[color:var(--line)]">
+                <NavLink
+                  ref={i === 0 ? firstLinkRef : undefined}
+                  to={l.to}
+                  end={l.to === "/"}
+                  className={({ isActive }) =>
+                    `flex items-baseline justify-between py-5 font-display text-3xl font-semibold uppercase ${
+                      isActive ? "text-gold" : "text-bone"
+                    }`
+                  }
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <Link to="/" onClick={() => { scrollToTop(); closeMobileMenu(); }} className="text-gray-300 hover:text-yellow-600 transition duration-300 ease-in-out">
-              Home
-            </Link>
-            <Link to="/about" onClick={() => { scrollToTop(); closeMobileMenu(); }} className="text-gray-300 hover:text-yellow-600 transition duration-300 ease-in-out">
-              About
-            </Link>
-            <Link to="/businesses" onClick={() => { scrollToTop(); closeMobileMenu(); }} className="text-gray-300 hover:text-yellow-600 transition duration-300 ease-in-out">
-              Business
-            </Link>
-            <Link to="/contacts" onClick={() => { scrollToTop(); closeMobileMenu(); }} className="text-gray-300 hover:text-yellow-600 transition duration-300 ease-in-out">
-              Contact
-            </Link>
-          </div>
-        </div>
-        <div className="hidden md:block">
-          <div className="flex items-center space-x-4">
-            <Link to="/" onClick={scrollToTop} className="relative text-gray-300 hover:text-yellow-600 px-3 py-2 transition duration-300 ease-in-out transform hover:scale-110">
-              Home
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transition-all duration-300 ease-in-out transform scale-x-0"></span>
-            </Link>
-            <Link to="/about" onClick={scrollToTop} className="relative text-gray-300 hover:text-yellow-600 px-3 py-2 transition duration-300 ease-in-out transform hover:scale-110">
-              About
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transition-all duration-300 ease-in-out transform scale-x-0"></span>
-            </Link>
-            <Link to="/businesses" onClick={scrollToTop} className="relative text-gray-300 hover:text-yellow-600 px-3 py-2 transition duration-300 ease-in-out transform hover:scale-110">
-              Business
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transition-all duration-300 ease-in-out transform scale-x-0"></span>
-            </Link>
-            <Link to="/contacts" onClick={scrollToTop} className="relative text-gray-300 hover:text-yellow-600 px-3 py-2 transition duration-300 ease-in-out transform hover:scale-110">
-              Contact
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transition-all duration-300 ease-in-out transform scale-x-0"></span>
-            </Link>
-          </div>
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={whatsappHref("Hello Amare Kharis, I would like to enquire about your services.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-gold w-full"
+          >
+            Message on WhatsApp
+          </a>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 

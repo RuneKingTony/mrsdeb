@@ -107,7 +107,7 @@ Empower your business with expertise and tailored solutions to thrive in today's
     },
     {
       id: 7,
-      name: "Project organization Services",
+      name: "Project Organization Services",
       sub: 'Project organization services to ensure smooth execution and success.',
       description: `Welcome to our project organization services, where we specialize in providing trusted project management solutions to bring your visions to fruition. At our core, we are the guiding hand you need to understand your vision, give it life and expression, assemble the requirements, oversee and navigate your projects seamlessly. 
 
